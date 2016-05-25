@@ -1,0 +1,133 @@
+<!doctype html>
+<html ng-app="mapsApp">
+
+<head>
+    <link rel="shortcut icon" href="">
+    <meta-charset="utf-8">
+        <title>maps</title>
+        <meta name="description" content="An example demonstrating Google Map integration with MEAN Apps">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/animatecss/3.5.1/animate.css" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic' rel='stylesheet' type='text/css'>
+    
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+</head>
+
+<body ng-controller="myCtrl">
+    <div class="top center">
+        <div class="top_nav">
+            <img class="brand_logo" src="logo.png">
+           <button class="button" ng-click="goTo('list_a_study')">List a Study</button>
+        </div>
+        <div class="hero_container">
+            <p>Get Paid</p>
+            <p>Find playtests and focus groups in your city.</p>
+             <button class="button" ng-click="goTo('browse_')">Browse Opportunities</button>
+        </div>
+
+      
+        <video class="responsive-video" autoplay loop>
+            <source src="http://res.cloudinary.com/elaine/video/upload/v1464040831/Hey-World_sd0hun.mp4" type="video/mp4" />
+            <source src="http://res.cloudinary.com/elaine/video/upload/v1464041592/Hey-World_bzjdgw.webm" type="video/webm" />
+        </video>
+    </div>
+   
+    <div class="browse_container">
+        <br>
+        <div class="row center">
+           <a name="browse_"> <i class="material-icons animated infinite bounce">location_on</i></a>
+            <h2>Select Your City</h2>
+            <div class="section">
+                <button ng-click="getListingByCity('San Jose')">San Jose</button>
+                <button ng-click="getListingByCity('San Francisco')">San Francisco</button>
+                <button ng-click="getListingByCity('Oakland')">Oakland</button>
+                <button ng-click="getListingByCity('Palo Alto')">Palo Alto</button>
+            </div>
+            <div class="section">
+                <div class="divider"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <div class="map_container">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row center">
+        <div class="section">
+            <div class="divider"></div>
+        </div>
+        <br>
+        <a name="list_a_study" ng-click="x()"><h3>List a Focus Group, User Study or Playtest!</h3></a>
+        <div class="section">
+            <div class="col s12">
+            <div class="form_container">
+                <input type="text" id="studytitle" placeholder="Short title of study?" ng-model="form.title" required>
+                <br>
+                <input type="number" id="studypay" placeholder="$ compensation amount?" ng-model="form.compensation" required>
+                <br>
+                <input type="text" id="agerange" placeholder="What is the age range?" ng-model="form.ageRange" required>
+                <br>
+                <input type="text" name="studygender" placeholder="type either female / male / both" ng-model="form.gender" required>
+                <br>
+                <input type="text" name="studymedtype" placeholder="type either medical / non-medical" ng-model="form.medType" required>
+                <br>
+                <label for="radio"> Study takes place in which city?</label>
+                <br>
+                <input type="radio" id="1" name="radiogroup" value="San Jose" ng-model="form.city" required>
+                <label for="1"> San Jose </label>
+                <input type="radio" id="2" name="radiogroup" value="San Francisco" ng-model="form.city">
+                <label for="2"> San Francisco </label>
+                <input type="radio" id="3" name="radiogroup" value="Oakland" ng-model="form.city">
+                <label for="3"> Oakland </label>
+                <input type="radio" id="4" name="radiogroup" value="Palo Alto" ng-model="form.city">
+                <label for="4"> Palo Alto </label>
+                <br>
+                <input type="text" name="studydescription" placeholder="short description of study" ng-model="form.description" required>
+                <br>
+                <input type="text" name="studylink" placeholder="Type the study link or researcher email" ng-model="form.link" required>
+                <br>
+                <button class="button" type="submit" ng-click="postListing(form)">Submit Study</button>
+                <br>
+                <br>
+                <button class="button" type="submit" ng-click="getListings()">Browse All Opportunities</button>
+                <br>
+            </div>
+            </div>
+        </div>
+        </div>
+        <br>
+        <div class="footer center">
+            <div class="container">
+                <img src="logo.png">
+                <br>
+                <span>© 2016 </span>
+            </div>
+        </div>
+        <!-- JS Source -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-route.min.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+        <script type="text/javascript" src="./js/SweetAlert.js"></script>
+         <script type="text/javascript" src="./js/SweetAlert.min.js"></script>
+        <!-- <script src="../bower_components/angularjs-geolocation/dist/angularjs-geolocation.min.js"></script> -->
+        <!-- Google Maps API -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCBmjbVBtVnYSqpYKHtEb5NaWrxzPUWlc"></script>
+         <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/js-marker-clusterer/1.0.0/markerclusterer.js">
+          </script> -->
+        <!-- APP.JS -->
+        <script type="text/javascript" src="./js/app.js"></script>
+        <!-- CONTROLLERS -->
+        <script type="text/javascript" src="./js/myCtrl.js"></script>
+        <!-- SERVICES -->
+        <script type="text/javascript" src="./js/myservice.js"></script>
+</body>
+
+</html>

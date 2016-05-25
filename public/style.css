@@ -1,0 +1,423 @@
+html, body {
+  height: 100%;
+  width: 100%;
+     margin:0;
+   padding:0;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+
+
+
+.top_nav {
+  z-index: 1000;
+  width: 100%;
+  position: absolute;
+  vertical-align: center;
+}
+
+.brand_logo {
+ float: left;
+ max-width: 130px;
+ padding: 15px;
+cursor: pointer
+}
+
+.top_nav button {
+  float: right;
+  margin: 15px;
+  margin-top: 17px;
+}
+
+
+
+.hero_container {
+  z-index: 1000;
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  text-align: center;
+    vertical-align: middle;
+  font-size: 2em;
+  line-height: 1;
+    font-weight: 700;
+    color: white;
+
+}
+
+
+
+.hero_container p:first-child{
+  font-size: 3em;
+  text-transform: uppercase;
+  margin-bottom: 0px;
+
+}
+
+.hero_container p:last-child {
+    margin-top: 0px;
+
+}
+
+
+.hero_container button {
+  font-size: 0.5em;
+}
+
+
+.hero_container button:hover {
+  font-size: 0.5em;
+}
+
+.button {
+color: white;
+padding: 10px;
+text-align: center;
+background-color: #ff5a5f;
+border: none;
+border-radius: 2px;
+font-weight: bold;
+font-size: 1em;
+}
+
+  .button:hover{
+    border: 2px solid #ff5a5f;
+    padding: 8px;
+    background: none;
+    font-size: 1em;
+    color: #fff;
+
+}
+
+
+
+.top {
+   width: 100%;
+   overflow: hidden;
+   max-height: 95%;
+   position: relative;
+
+}
+
+.top:before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  top:0;
+  left:0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+
+
+}
+
+video { 
+ 
+   /* object-fit: contain;*/
+      
+}
+
+h2, h3 {
+color: #565a5c;
+margin-top: 0px;
+
+}
+
+.material-icons {
+  font-size: 50px;
+  color: #008CFF;
+  animation-delay:0.6s;
+}
+
+
+.browse_container button {
+    border: 2px solid #ff5a5f;
+    padding: 12px 25px;
+    margin-right:10px;
+    background: none;
+    color: #ff5a5f;
+
+}
+
+.browse_container button:hover{
+   background: #ff5a5f;
+    color: #fff;
+}
+
+
+.form_container button:hover {
+   border: 2px solid #ff5a5f;
+    padding: 8px;
+    background: none;
+    color: #ff5a5f;
+
+
+}
+
+.map_container{
+ 
+width: 100%; 
+height: 400px;
+
+
+}
+
+#map {
+ width: 60%; 
+ height: 100%;
+ margin: 0 auto;
+
+
+}
+
+.form_container {
+ width: 70%;
+ margin: 0 auto;
+ border-radius: 1px;
+ box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px 
+ rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+ padding: 40px;
+vertical-align: middle;
+text-align: center;
+
+
+}
+
+
+input, select {
+   text-align: center;
+   color: black;
+
+}
+
+.footer{
+    width: 100%;
+    background-color: #f8bbd0;
+    color: #565a5c;
+    max-height: 35%;
+    position: relative;
+    margin-bottom:-20px;
+    bottom: 0;
+
+
+
+}
+
+
+.footer img {
+  height: 45px;
+  margin-top: 8px;
+
+}
+
+/*-----------------------------------------------------*/
+/*---------------------MEDIA QUERIES ------------------*/
+/*-----------------------------------------------------*/
+
+/*---------------------MEDIA QUERY (min-width: 715px) and (max-width: 870px) ------------------*/
+
+
+
+@media (min-width: 715px) and (max-width: 870px) {
+
+
+.hero_container {
+  z-index: 1000;
+  text-align: center;
+   margin-left: -90px;
+    line-height: 1;
+    font-weight: 700;
+    color: white;
+
+    
+}
+
+
+.hero_container p:first-child{
+  font-size: 3em;
+  text-transform: uppercase;
+  margin-bottom: 0px;
+
+}
+
+.hero_container p:last-child {
+    margin-top: 0px;
+
+}
+
+
+.hero_container button {
+  font-size: 0.5em;
+}
+
+
+.hero_container button:hover {
+  font-size: 0.5em;
+}
+
+
+.browse_container button {
+    border: 2px solid #ff5a5f;
+    padding: 6px 13px;
+    margin-right:0px;
+    background: none;
+    color: #ff5a5f;
+
+}
+
+.browse_container button:hover{
+   background: #ff5a5f;
+    color: #fff;
+}
+
+
+}
+
+/*---------------------MEDIA QUERY (min-width: 600px) and (max-width: 714px) ------------------*/
+
+@media (min-width: 600px) and (max-width: 714px) {
+
+
+.hero_container {
+  z-index: 1000;
+  vertical-align: middle;
+ margin-top: -60px;
+
+    line-height: 1;
+    font-weight: 700;
+    color: white;
+
+    
+}
+
+
+.hero_container p{
+  font-size: 15px;
+  text-transform: uppercase;
+
+}
+
+
+.hero_container button {
+  font-size: 15px;
+  margin-top: -50px;
+}
+
+
+.hero_container button:hover {
+ font-size: 15px;
+}
+
+}
+
+/*---------------------MEDIA QUERY (min-width: 530px) and (max-width: 599px) ------------------*/
+
+
+@media (min-width: 530px) and (max-width: 599px) {
+
+  .hero_container {
+  z-index: 1000;
+  vertical-align: middle;
+ margin-top: -30px;
+    color: white;
+    font-size: 25px;
+
+    
+}
+
+
+.hero_container p{
+  font-size: 15px;
+  text-transform: uppercase;
+
+}
+
+
+.hero_container button {
+  font-size: 15px;
+  margin-top: -50px;
+}
+
+
+.hero_container button:hover {
+  font-size: 15px;
+}
+
+}
+
+/*---------------------MEDIA QUERY (max-width: 529px) ------------------*/
+
+@media (max-width: 529px) {
+
+  .brand_logo {
+ float: left;
+ max-width: 100px;
+ padding: 15px;
+cursor: pointer
+}
+
+  
+  .hero_container {
+  z-index: 1000;
+  vertical-align: middle;
+   margin-top: -30px;
+    color: white; 
+      font-size: 1em;  
+}
+
+
+.hero_container p{
+  text-transform: uppercase;
+  font-size: 0.6em; 
+
+}
+
+
+
+.hero_container button {
+  font-size: 10px;
+  margin: 0px;
+}
+
+
+.hero_container button:hover {
+ font-size: 10px;
+}
+
+.top button {
+  font-size: 10px;
+}
+
+.top button:hover {
+ background: transparent;
+    color: #fff;
+}
+
+.browse_container button {
+    border: 2px solid #ff5a5f;
+    padding: 6px 13px;
+    margin:5px;
+    background: none;
+    display: inline-block;
+    color: #ff5a5f;
+
+}
+
+.browse_container button:hover{
+   background: #ff5a5f;
+    color: #fff;
+  
+}
+label, input[type="text"], input[type="number"]{
+  font-size: 10px;
+  font-style: none;
+}
+
+}
+
+

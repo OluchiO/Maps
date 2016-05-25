@@ -1,9 +1,11 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var port = process.env.PORT || 3000;
-var MONGOLAB_URI = 'mongodb://outerlimits:mercy@ds015713.mlab.com:15713/reaction';
-var uristring = process.env.MONGOLAB_URI || 'mongodb://localhost:27017/maps';
-mongoose.connect(uristring);
+MONGOLAB_URI = 'mongodb://outerlimits:mercy@ds015713.mlab.com:15713/reaction';
+//var uristring = process.env.MONGOLAB_URI || 'mongodb://localhost:27017/maps';
+mongoose.connect(process.env.MONGOLAB_URI, function() {
+  console.log('Mongoose connected to your soul');
+});
 var morgan  = require('morgan');
 var bodyParser= require('body-parser');
 var methodOverride = require('method-override');
@@ -39,11 +41,11 @@ app.post('/postListing', function(req, res){
         });
     });
 
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  console.log('Mongoose connected to your soul on:', uristring);
-});
+// var db = mongoose.connection;
+// db.on('error', console.error.bind(console, 'connection error:'));
+// db.once('open', function() {
+//   console.log('Mongoose connected to your soul on:', uristring);
+// });
   
 
 app.listen(port, function() {

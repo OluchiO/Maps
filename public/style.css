@@ -171,34 +171,59 @@ height: 400px;
  width: 60%; 
  height: 100%;
  margin: 0 auto;
-
-
 }
 
+.star {
+  color: #ffee58;
+}
+
+h4{
+  padding-bottom: 1.7rem;
+  margin: 0;
+  font-weight: 400;
+  color: #565a5c;
+}
+
+
 .form_container {
- width: 70%;
+ width: 50%;
  margin: 0 auto;
  border-radius: 1px;
  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px 
  rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
  padding: 40px;
 vertical-align: middle;
-text-align: center;
+background: #ffebee;
+
+}
 
 
+
+input:not([type]), input[type=text], input[type=number], input[type=password], input[type=search], 
+input[type=email], input[type=time], input[type=url], input, select, option, 
+textarea {
+    padding: .2rem .2rem;
+    border: 1px solid #d9dde0;
+    border-radius: .15rem;
+    text-align: left;
+    color: #616161;
+    background: white;
+    box-sizing: border-box;
 }
 
 
-input, select {
-   text-align: center;
-   color: black;
-
+label {
+   font-size: 1.5rem;
+   font-weight: 300;
 }
+
+
 
 .footer{
     width: 100%;
-    background-color: #f8bbd0;
-    color: #565a5c;
+    border-top: 1rem solid #f4bcbc;
+    background-color: #f7cdcd;
+    color: #ffcdd2;
     max-height: 35%;
     position: relative;
     margin-bottom:-20px;
@@ -212,6 +237,7 @@ input, select {
 .footer img {
   height: 45px;
   margin-top: 8px;
+  opacity: 0.7;
 
 }
 
@@ -413,8 +439,8 @@ cursor: pointer
     color: #fff;
   
 }
-label, input[type="text"], input[type="number"]{
-  font-size: 10px;
+label, input[type="text"], input[type="number"], select, option{
+  font-size: 9px;
   font-style: none;
 }
 

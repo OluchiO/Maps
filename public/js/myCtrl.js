@@ -1,5 +1,8 @@
 angular.module('mapsApp', ['oitozero.ngSweetAlert']).
 controller('myCtrl', function($scope, myService, $http, $location, $anchorScroll, SweetAlert){
+$scope.markers;
+var allListings = [];
+var pos; 
 
  $scope.map = new google.maps.Map(document.getElementById('map'), {
             mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -7,40 +10,48 @@ controller('myCtrl', function($scope, myService, $http, $location, $anchorScroll
             zoom: 8
         });
 
-
+  
  $scope.infoWindow = new google.maps.InfoWindow({});
- $scope.markers = [];
+
  
- 
+      var reloadMarkers = function () {
+         if($scope.markers !== undefined)
+          for (var i = 0; i < $scope.markers.length; i++) {    
+            $scope.markers[i].setMap(null);
+          }
+    $scope.markers = [];
+    
+      };  
+
 
 
  $scope.postListing = function(form) {
-      
         if (form === undefined || form === null || form === "") {
-            SweetAlert.swal("All Fields Required!", "There was a problem with your submission", "error"); 
+           return SweetAlert.swal("All Fields Required!", "There was a problem with your submission", "error"); 
         }
-            myService.postListing(form).then(function(response) {
-              if (response.message) {
-                SweetAlert.swal("Please try again!", "There was a problem with your submission", "error");
-              } else {
-               SweetAlert.swal("Added!", "Thanks for submitting your listing to the map", "success");
-           console.log("Controller has received response from Server: ", response); 
-              }
+         myService.postListing(form).then(function(response) {
+          form = "";
+          SweetAlert.swal("Added!", "Thanks for submitting your listing to the map", "success");
+            }, function(err){
+               SweetAlert.swal("Sorry!", err, "error");
+            }
+            )};
+          
             
-      });
-        };
-
+                     
+                        
    
   $scope.getListings = function(){
-     var allListings = [];
+    reloadMarkers();
     $http.get('/getListings').success(function(response){
-       console.log("Returned from DATABASE: ", response);
-      for(var i= 0; i < response.length; i++) {
+      for(var i = 0; i < response.length; i++) {
                 allListings.push(response[i]);
               }
                $scope.createMarker(allListings);
+               $scope.map.setZoom(10);
+               allListings = [];
              }).error(function(err) {
-                console.log("Did not go to controller", err);
+                console.log(err);
             });
       $location.hash('browse_');
       $anchorScroll();
@@ -50,91 +61,83 @@ controller('myCtrl', function($scope, myService, $http, $location, $anchorScroll
            $scope.goTo = function(link){
             $location.hash(link);
             $anchorScroll();
-
            };
 
 
-
-    $scope.getListingByCity = function(stringValue) {
-     
+    $scope.getListingByCity = function(stringValue) { 
+      reloadMarkers();
       var city = stringValue;
-
-      var allListings = [];
     $http.get('/getListings').success(function(response){
    
-      for(var i= 0; i < response.length; i++) {
-        if(response[i].city === city) {
+      for (var i = 0; i < response.length; i++) {
+        if (response[i].city === city) {
                 allListings.push(response[i]);
               }
             }
-            console.log("filtered by city? : ", allListings);
-               var y = $scope.createMarker(allListings);
-               $scope.map.panTo($scope.obj);
-                city = "";
-                $scope.obj = "";
-    
+               $scope.createMarker(allListings);
+               allListings = [];
+               $scope.map.setZoom(17);
+
              }).error(function(err) {
-                console.log("Did not go to controller", err);
+                console.log(err);
             });
-             
+       
            };
-
-  
-
-
-
+        
+ 
 
         $scope.createMarker = function(allListings){
-          console.log("here is listings :", allListings);
-          var contentString = "";
-          allListings.forEach(function(user){
+          allListings.forEach(function(listing){
 
-          contentString =
-                    '<p><b>Study Name:</b> ' + user.title +
-                    '<br><b>Link to Study:</b> ' + user.link +
-                    '<br><b>Ages:</b> ' + user.ageRange +
-                    '<br><b>Compensation:</b> $' + user.compensation +
-                    '<br><b>Type:</b> ' + user.medType +
+          var contentString =
+                    '<p><b>Study Name:</b> ' + listing.title +
+                    '<br><b>Study Link:</b> ' + listing.link +
+                    '<br><b>Ages:</b> ' + listing.ageRange +
+                    '<br><b>Compensation:</b> $' + listing.compensation +
+                    '<br><b>Type:</b> ' + listing.medType +
                     '</p>';
+
             var geocoder = new google.maps.Geocoder();
+
             geocoder.geocode({
-                'address': user.city
+                'address': listing.city
             },
                 function (results, status) {
                  
-            var newLat = results[0].geometry.location.lat() + (Math.random() -.5) / 1500;// * (Math.random() * (max - min) + min);
-            var newLng = results[0].geometry.location.lng() + (Math.random() -.5) / 1500;// * (Math.random() * (max - min) + min);
-            var pos = new google.maps.LatLng(newLat,newLng);
-            $scope.obj = pos;
-             console.log("position: ", pos);
+            var newLat = results[0].geometry.location.lat() + (Math.random() -.5) / 1500;
+            var newLng = results[0].geometry.location.lng() + (Math.random() -.5) / 1500;
+            pos = new google.maps.LatLng(newLat,newLng);
+
                     if (status == google.maps.GeocoderStatus.OK) {
                         var marker = new google.maps.Marker({
-                            position: pos, //results[0].geometry.location
+                            position: pos, 
                             map: $scope.map,
-                            title: user.city,
+                            animation: google.maps.Animation.DROP,
+                            title: listing.city,
                             icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
                             content: contentString
                         });
 
-                       google.maps.event.addListener(marker, 'click', function () {
+                       google.maps.event.addListener(marker, 'click', function (e) {
                             $scope.infoWindow.setContent('<h4>' + marker.title + '</h4>' + marker.content);
                             $scope.infoWindow.open($scope.map, marker);
+                          
                         });
 
+                       $scope.markers.push(marker);
+                       $scope.map.panTo(pos);
 
-                        $scope.markers.push(marker);
 
-  
-                    }
+                    }                         
+
            
                 });
+        
+                
 
         });
  
 };
-
-        
-
 
 
     });

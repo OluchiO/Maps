@@ -11,10 +11,10 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/animatecss/3.5.1/animate.css" rel="stylesheet">
-        <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic' rel='stylesheet' type='text/css'>
-    
+        <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,700italic' rel='stylesheet' type='text/css'>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
         <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+       
 </head>
 
 <body ng-controller="myCtrl">
@@ -59,69 +59,93 @@
             </div>
         </div>
     </div>
-    <div class="row center">
+   
         <div class="section">
             <div class="divider"></div>
         </div>
-        <br>
-        <a name="list_a_study" ng-click="x()"><h3>List a Focus Group, User Study or Playtest!</h3></a>
-        <div class="section">
-            <div class="col s12">
+       
+   
+            <div class="row center">
+             <a name="list_a_study"><i class="material-icons animated infinite pulse star">star</i></a>
+             <h4>List a Focus Group or User Study</h4>
             <div class="form_container">
-                <input type="text" id="studytitle" placeholder="Short title of study?" ng-model="form.title" required>
+                <label for="studytitle">Title</label>
+                <input class="browser-default" type="text" name="studytitle" placeholder="Short Title For Study" ng-model="form.title" required>
                 <br>
-                <input type="number" id="studypay" placeholder="$ compensation amount?" ng-model="form.compensation" required>
+                <label for="studypay">Compensation</label>
+                <select class="browser-default" name="studypay" ng-model="form.compensation" required>
+      <option value="" selected>Choose your option</option>
+      <option value="25">$ 25</option>
+      <option value="50">$ 50</option>
+      <option value="75">$ 75</option>
+      <option value="100">$ 100</option>
+      <option value="125">$ 125</option>
+      <option value="200">$ 200</option>
+    </select>
+             
                 <br>
-                <input type="text" id="agerange" placeholder="What is the age range?" ng-model="form.ageRange" required>
+                 <label for="agerange">Age Range</label>
+               <input type="text" name="agerange" placeholder="Age Range" ng-model="form.ageRange" required>
                 <br>
-                <input type="text" name="studygender" placeholder="type either female / male / both" ng-model="form.gender" required>
+                  <label for="studygender">Gender</label>
+                <select class="browser-default" name="studygender" ng-model="form.gender" required>
+      <option value="" selected>Choose your option</option>
+      <option value="female">female</option>
+      <option value="male">male</option>
+      <option value="both">both</option>
+    </select>
+    <br>
+                          <label for="studymedtype">Category</label>
+             <select class="browser-default" name="studygender" ng-model="form.medType" required>
+      <option value="" selected>Choose your option</option>
+      <option value="medical">non-medical</option>
+      <option value="non-medical">medical</option>
+    </select>
+    <br>
+
+                          <label for="studycity">City</label>
+             <select class="browser-default" name="studycity" ng-model="form.city" required>
+       <option value="" selected>Choose your option</option>
+      <option value="San Jose">San Jose</option>
+      <option value="San Francisco">San Francisco</option>
+    <option value="Oakland">Oakland</option>
+      <option value="Palo Alto">Palo Alto</option>
+    </select>
+    <br>
+
+     <label for="studydescription">Description</label>
+     <input type="text" name="studydescription" placeholder="Short Description" ng-model="form.description" required>
                 <br>
-                <input type="text" name="studymedtype" placeholder="type either medical / non-medical" ng-model="form.medType" required>
+                <label for="studylink">Link</label>
+                <input type="text" name="studylink" placeholder="Study Link or Researcher Email" ng-model="form.link" required>
                 <br>
-                <label for="radio"> Study takes place in which city?</label>
-                <br>
-                <input type="radio" id="1" name="radiogroup" value="San Jose" ng-model="form.city" required>
-                <label for="1"> San Jose </label>
-                <input type="radio" id="2" name="radiogroup" value="San Francisco" ng-model="form.city">
-                <label for="2"> San Francisco </label>
-                <input type="radio" id="3" name="radiogroup" value="Oakland" ng-model="form.city">
-                <label for="3"> Oakland </label>
-                <input type="radio" id="4" name="radiogroup" value="Palo Alto" ng-model="form.city">
-                <label for="4"> Palo Alto </label>
-                <br>
-                <input type="text" name="studydescription" placeholder="short description of study" ng-model="form.description" required>
-                <br>
-                <input type="text" name="studylink" placeholder="Type the study link or researcher email" ng-model="form.link" required>
-                <br>
-                <button class="button" type="submit" ng-click="postListing(form)">Submit Study</button>
+        <button class="button" type="submit" ng-click="postListing(form)">Submit Study</button>
                 <br>
                 <br>
-                <button class="button" type="submit" ng-click="getListings()">Browse All Opportunities</button>
+    <button class="button" type="submit" ng-click="getListings()">Browse All Opportunities</button>
                 <br>
-            </div>
-            </div>
+                 </div>
         </div>
-        </div>
-        <br>
-        <div class="footer center">
+
+                      <div class="footer center">
             <div class="container">
                 <img src="logo.png">
                 <br>
-                <span>© 2016 </span>
+                
             </div>
         </div>
         <!-- JS Source -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
+ 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-route.min.js"></script>
          <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
         <script type="text/javascript" src="./js/SweetAlert.js"></script>
          <script type="text/javascript" src="./js/SweetAlert.min.js"></script>
-        <!-- <script src="../bower_components/angularjs-geolocation/dist/angularjs-geolocation.min.js"></script> -->
+     
         <!-- Google Maps API -->
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCBmjbVBtVnYSqpYKHtEb5NaWrxzPUWlc"></script>
-         <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/js-marker-clusterer/1.0.0/markerclusterer.js">
-          </script> -->
+
         <!-- APP.JS -->
         <script type="text/javascript" src="./js/app.js"></script>
         <!-- CONTROLLERS -->

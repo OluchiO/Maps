@@ -1,7 +1,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var port = process.env.PORT || 3000;
-var MONGOLAB_URI = 'YOUR-MONGO-URI-HERE';
+var MONGOLAB_URI = 'mongodb://outerlimits:mercy@ds015713.mlab.com:15713/reaction';
 var uristring = 'mongodb://localhost:27017/maps';
 mongoose.connect(MONGOLAB_URI, function() {
     console.log('Mongoose connected to your soul');

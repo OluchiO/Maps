@@ -9,7 +9,6 @@ var UserSchema = mongoose.Schema({
     city: {type: String},
     description: {type: String, required: true},
     link: {type: String, required: true},
-  // WHAT DO I NEED FOR GOOGLE??
     created_at: {type: Date, default: Date.now},
     updated_at: {type: Date, default: Date.now}
 
